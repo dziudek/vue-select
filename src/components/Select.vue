@@ -565,6 +565,15 @@
           dropdownList.style.left = left;
           dropdownList.style.width = width;
         }
+      },
+
+      /**
+       * Set the maximum number of displayed options, -1 means unlimited
+       * @type {Number}
+       */
+      maxItemsDisplay: {
+        type: Number,
+        default: -1
       }
     },
 
@@ -1165,7 +1174,12 @@
             options.unshift(createdOption);
           }
         }
-        return options;
+
+        if (this.maxItemsDisplay === -1) {
+          return options;
+        }
+        
+        return options.slice(0, this.maxItemsDisplay);
       },
 
       /**
